@@ -666,7 +666,8 @@ export function usePlantModel() {
                 </p>
                 <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-md font-mono text-sm overflow-x-auto">
                   <pre>
-{`// app/scan/page.tsx
+{`
+// app/scan/page.tsx
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -981,7 +982,7 @@ export default function ScanPage() {
       </Card>
     </div>
   );
-}
+} `}
 </pre>
                 </div>
               </div>
@@ -1028,4 +1029,3 @@ export default function ScanPage() {
     </div>
   );
 }
-
