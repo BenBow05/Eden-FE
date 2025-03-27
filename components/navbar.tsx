@@ -64,13 +64,18 @@ export function Navbar() {
               className="border-green-600 text-green-700 hover:bg-green-50 dark:text-green-400 dark:border-green-500 dark:hover:bg-green-900"
             />
             <ModeToggle />
-            <Button
-              variant="outline"
-              className="border-green-600 text-green-700 hover:bg-green-50 dark:text-green-400 dark:border-green-500 dark:hover:bg-green-900"
-            >
-              Log in
-            </Button>
-            <Button className="bg-green-600 hover:bg-green-700 text-white">Sign up</Button>
+            <Link href="/login">
+              <Button
+                variant="outline"
+                className="border-green-600 text-green-700 hover:bg-green-50 dark:text-green-400 dark:border-green-500 dark:hover:bg-green-900"
+              >
+                Log in
+              </Button>
+            </Link>
+            <Link href="/sign-up">
+              <Button className="bg-green-600 hover:bg-green-700 text-white">Sign up</Button>
+            </Link>
+
           </div>
 
           <div className="md:hidden flex items-center space-x-2">
