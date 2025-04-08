@@ -17,6 +17,7 @@ import {
   CheckCircle2,
   AlertCircle,
 } from "lucide-react"
+import ScanPage from "../scan/page";
 
 export default function ModelTrainingPage() {
   const [activeTab, setActiveTab] = useState("dataset")
@@ -29,7 +30,7 @@ export default function ModelTrainingPage() {
       <p className="text-green-600 dark:text-green-400 mb-8 max-w-3xl">
         Follow this guide to create and train your custom plant identification model using Google Colab
       </p>
-      
+
       <Tabs defaultValue="dataset" onValueChange={setActiveTab}>
         <TabsList className="grid grid-cols-4 mb-8">
           <TabsTrigger value="dataset" className="data-[state=active]:bg-green-600 data-[state=active]:text-white">
@@ -49,7 +50,7 @@ export default function ModelTrainingPage() {
             Integration
           </TabsTrigger>
         </TabsList>
-        
+
         <TabsContent value="dataset" className="space-y-6">
           <Card>
             <CardHeader>
@@ -96,9 +97,9 @@ export default function ModelTrainingPage() {
                   </div>
                 </div>
               </div>
-              
+
               <Separator />
-              
+
               <div className="space-y-2">
                 <h3 className="text-lg font-medium text-green-800 dark:text-green-300">
                   2. Organize Your Dataset
@@ -108,7 +109,7 @@ export default function ModelTrainingPage() {
                 </p>
                 <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-md font-mono text-sm overflow-x-auto">
                   <pre>
-{`dataset/
+                    {`dataset/
 ├── tomato/
 │   ├── seed/
 │   │   ├── image1.jpg
@@ -129,9 +130,9 @@ export default function ModelTrainingPage() {
                   </pre>
                 </div>
               </div>
-              
+
               <Separator />
-              
+
               <div className="space-y-2">
                 <h3 className="text-lg font-medium text-green-800 dark:text-green-300">
                   3. Data Sources
@@ -149,7 +150,7 @@ export default function ModelTrainingPage() {
               </div>
             </CardContent>
             <CardFooter>
-              <Button 
+              <Button
                 onClick={() => setActiveTab("training")}
                 className="ml-auto bg-green-600 hover:bg-green-700 text-white"
               >
@@ -158,7 +159,7 @@ export default function ModelTrainingPage() {
             </CardFooter>
           </Card>
         </TabsContent>
-        
+
         <TabsContent value="training" className="space-y-6">
           <Card>
             <CardHeader>
@@ -187,9 +188,9 @@ export default function ModelTrainingPage() {
                   </p>
                 </div>
               </div>
-              
+
               <Separator />
-              
+
               <div className="space-y-2">
                 <h3 className="text-lg font-medium text-green-800 dark:text-green-300">
                   2. Upload Your Dataset
@@ -199,7 +200,7 @@ export default function ModelTrainingPage() {
                 </p>
                 <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-md font-mono text-sm overflow-x-auto">
                   <pre>
-{`# Mount Google Drive
+                    {`# Mount Google Drive
 from google.colab import drive
 drive.mount('/content/drive')
 
@@ -215,29 +216,29 @@ uploaded = files.upload()  # For small files
                   </pre>
                 </div>
               </div>
-              
+
               <Separator />
-              
+
               <div className="space-y-2">
                 <h3 className="text-lg font-medium text-green-800 dark:text-green-300">
                   3. Install Dependencies
                 </h3>
                 <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-md font-mono text-sm overflow-x-auto">
                   <pre>
-{`!pip install tensorflow tensorflow-hub matplotlib pillow scikit-learn`}
+                    {`!pip install tensorflow tensorflow-hub matplotlib pillow scikit-learn`}
                   </pre>
                 </div>
               </div>
-              
+
               <Separator />
-              
+
               <div className="space-y-2">
                 <h3 className="text-lg font-medium text-green-800 dark:text-green-300">
                   4. Prepare the Dataset
                 </h3>
                 <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-md font-mono text-sm overflow-x-auto">
                   <pre>
-{`import tensorflow as tf
+                    {`import tensorflow as tf
 import os
 import matplotlib.pyplot as plt
 import numpy as np
@@ -284,9 +285,9 @@ validation_dataset = validation_dataset.prefetch(buffer_size=AUTOTUNE)`}
                   </pre>
                 </div>
               </div>
-              
+
               <Separator />
-              
+
               <div className="space-y-2">
                 <h3 className="text-lg font-medium text-green-800 dark:text-green-300">
                   5. Create and Train the Model
@@ -296,7 +297,7 @@ validation_dataset = validation_dataset.prefetch(buffer_size=AUTOTUNE)`}
                 </p>
                 <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-md font-mono text-sm overflow-x-auto">
                   <pre>
-{`# Create base model from MobileNetV2
+                    {`# Create base model from MobileNetV2
 base_model = tf.keras.applications.MobileNetV2(
     input_shape=(IMG_SIZE, IMG_SIZE, 3),
     include_top=False,
@@ -385,14 +386,14 @@ plt.show()`}
               </div>
             </CardContent>
             <CardFooter className="flex justify-between">
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 onClick={() => setActiveTab("dataset")}
                 className="border-green-600 text-green-700 hover:bg-green-50 dark:text-green-400 dark:border-green-500 dark:hover:bg-green-900"
               >
                 Back: Dataset
               </Button>
-              <Button 
+              <Button
                 onClick={() => setActiveTab("export")}
                 className="bg-green-600 hover:bg-green-700 text-white"
               >
@@ -401,7 +402,7 @@ plt.show()`}
             </CardFooter>
           </Card>
         </TabsContent>
-        
+
         <TabsContent value="export" className="space-y-6">
           <Card>
             <CardHeader>
@@ -419,7 +420,7 @@ plt.show()`}
                 </h3>
                 <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-md font-mono text-sm overflow-x-auto">
                   <pre>
-{`# Save the entire model
+                    {`# Save the entire model
 model.save('/content/plant_model')
 
 # Save class names for later use
@@ -429,29 +430,29 @@ with open('/content/class_names.json', 'w') as f:
                   </pre>
                 </div>
               </div>
-              
+
               <Separator />
-              
+
               <div className="space-y-2">
                 <h3 className="text-lg font-medium text-green-800 dark:text-green-300">
                   2. Install TensorFlow.js Converter
                 </h3>
                 <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-md font-mono text-sm overflow-x-auto">
                   <pre>
-{`!pip install tensorflowjs`}
+                    {`!pip install tensorflowjs`}
                   </pre>
                 </div>
               </div>
-              
+
               <Separator />
-              
+
               <div className="space-y-2">
                 <h3 className="text-lg font-medium text-green-800 dark:text-green-300">
                   3. Convert the Model to TensorFlow.js Format
                 </h3>
                 <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-md font-mono text-sm overflow-x-auto">
                   <pre>
-{`!mkdir -p /content/tfjs_model
+                    {`!mkdir -p /content/tfjs_model
 !tensorflowjs_converter --input_format=tf_saved_model \\
                        --output_format=tfjs_graph_model \\
                        --signature_name=serving_default \\
@@ -461,16 +462,16 @@ with open('/content/class_names.json', 'w') as f:
                   </pre>
                 </div>
               </div>
-              
+
               <Separator />
-              
+
               <div className="space-y-2">
                 <h3 className="text-lg font-medium text-green-800 dark:text-green-300">
                   4. Download the Converted Model
                 </h3>
                 <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-md font-mono text-sm overflow-x-auto">
                   <pre>
-{`# Zip the model files
+                    {`# Zip the model files
 !zip -r /content/tfjs_plant_model.zip /content/tfjs_model /content/class_names.json
 
 # Download the zip file
@@ -485,9 +486,9 @@ files.download('/content/tfjs_plant_model.zip')`}
                   </p>
                 </div>
               </div>
-              
+
               <Separator />
-              
+
               <div className="space-y-2">
                 <h3 className="text-lg font-medium text-green-800 dark:text-green-300">
                   5. Host Your Model Files
@@ -511,14 +512,14 @@ files.download('/content/tfjs_plant_model.zip')`}
               </div>
             </CardContent>
             <CardFooter className="flex justify-between">
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 onClick={() => setActiveTab("training")}
                 className="border-green-600 text-green-700 hover:bg-green-50 dark:text-green-400 dark:border-green-500 dark:hover:bg-green-900"
               >
                 Back: Export
               </Button>
-              <Button 
+              <Button
                 onClick={() => setActiveTab("integration")}
                 className="bg-green-600 hover:bg-green-700 text-white"
               >
@@ -527,7 +528,7 @@ files.download('/content/tfjs_plant_model.zip')`}
             </CardFooter>
           </Card>
         </TabsContent>
-        
+
         <TabsContent value="integration" className="space-y-6">
           <Card>
             <CardHeader>
@@ -548,13 +549,13 @@ files.download('/content/tfjs_plant_model.zip')`}
                 </p>
                 <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-md font-mono text-sm overflow-x-auto">
                   <pre>
-{`npm install @tensorflow/tfjs`}
+                    {`npm install @tensorflow/tfjs`}
                   </pre>
                 </div>
               </div>
-              
+
               <Separator />
-              
+
               <div className="space-y-2">
                 <h3 className="text-lg font-medium text-green-800 dark:text-green-300">
                   2. Create a Model Loader Component
@@ -564,7 +565,7 @@ files.download('/content/tfjs_plant_model.zip')`}
                 </p>
                 <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-md font-mono text-sm overflow-x-auto">
                   <pre>
-{`// components/plant-model.tsx
+                    {`// components/plant-model.tsx
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
@@ -654,9 +655,9 @@ export function usePlantModel() {
                   </pre>
                 </div>
               </div>
-              
+
               <Separator />
-              
+
               <div className="space-y-2">
                 <h3 className="text-lg font-medium text-green-800 dark:text-green-300">
                   3. Update the Scan Component
@@ -665,330 +666,12 @@ export function usePlantModel() {
                   Integrate the model with your scanning functionality:
                 </p>
                 <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-md font-mono text-sm overflow-x-auto">
-                  <pre>
-{`
-// app/scan/page.tsx
-"use client";
-
-import { useState, useRef, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Camera, Upload, RefreshCw, Loader2 } from 'lucide-react';
-import { usePlantModel } from "@/components/plant-model";
-
-export default function ScanPage() {
-  const [capturedImage, setCapturedImage] = useState<string | null>(null);
-  const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [analysisResult, setAnalysisResult] = useState<any | null>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const streamRef = useRef<MediaStream | null>(null);
-  const imageRef = useRef<HTMLImageElement>(null);
-  
-  // Use the plant model hook
-  const { 
-    model, 
-    isLoading: isModelLoading, 
-    error: modelError, 
-    loadModel, 
-    identifyPlant 
-  } = usePlantModel();
-  
-  useEffect(() => {
-    // Load the model when the component mounts
-    loadModel();
-    
-    // Check if there's a captured image in localStorage
-    const storedImage = localStorage.getItem("capturedImage");
-    if (storedImage) {
-      setCapturedImage(storedImage);
-      // Clear the stored image
-      localStorage.removeItem("capturedImage");
-    } else {
-      startCamera();
-    }
-    
-    // Cleanup on unmount
-    return () => {
-      stopCamera();
-    };
-  }, []);
-  
-  // When we have a captured image and the model is loaded, analyze it
-  useEffect(() => {
-    if (capturedImage && model && !isAnalyzing && !analysisResult) {
-      analyzeImage(capturedImage);
-    }
-  }, [capturedImage, model]);
-  
-  const startCamera = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: "environment" },
-      });
-      
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        streamRef.current = stream;
-      }
-    } catch (err) {
-      console.error("Error accessing camera:", err);
-    }
-  };
-  
-  const stopCamera = () => {
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach((track) => track.stop());
-      streamRef.current = null;
-    }
-  };
-  
-  const captureImage = () => {
-    if (videoRef.current) {
-      const canvas = document.createElement("canvas");
-      canvas.width = videoRef.current.videoWidth;
-      canvas.height = videoRef.current.videoHeight;
-      const ctx = canvas.getContext("2d");
-      
-      if (ctx) {
-        ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
-        const imageDataUrl = canvas.toDataURL("image/jpeg");
-        setCapturedImage(imageDataUrl);
-        stopCamera();
-      }
-    }
-  };
-  
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const imageDataUrl = event.target?.result as string;
-        setCapturedImage(imageDataUrl);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-  
-  const analyzeImage = async (imageUrl: string) => {
-    if (!model) {
-      console.error("Model not loaded yet");
-      return;
-    }
-    
-    setIsAnalyzing(true);
-    
-    try {
-      // Create an image element from the data URL
-      const img = new Image();
-      img.src = imageUrl;
-      
-      // Wait for the image to load
-      await new Promise((resolve) => {
-        img.onload = resolve;
-      });
-      
-      // Run the model prediction
-      const result = await identifyPlant(img);
-      
-      // Add additional plant information based on the identification
-      const enhancedResult = {
-        ...result,
-        scientificName: getScientificName(result.className),
-        careNeeds: getCareNeeds(result.className, result.growthStage),
-        recipes: getRecipeIdeas(result.className, result.growthStage),
-      };
-      
-      setAnalysisResult(enhancedResult);
-    } catch (err) {
-      console.error("Error analyzing image:", err);
-    } finally {
-      setIsAnalyzing(false);
-    }
-  };
-  
-  // Helper functions to provide additional information
-  const getScientificName = (plantName: string) => {
-    const scientificNames: Record<string, string> = {
-      "Tomato": "Solanum lycopersicum",
-      "Basil": "Ocimum basilicum",
-      "Lettuce": "Lactuca sativa",
-      // Add more plants as needed
-    };
-    
-    return scientificNames[plantName] || "Unknown species";
-  };
-  
-  const getCareNeeds = (plantName: string, growthStage: string) => {
-    // Return care needs based on plant type and growth stage
-    // This would be expanded with your plant database
-    return {
-      water: "Medium",
-      light: "Full Sun",
-      soil: "Well-draining, rich in organic matter",
-      tips: [
-        "Water consistently, keeping soil evenly moist",
-        "Ensure adequate sunlight exposure",
-        "Monitor for pests and diseases",
-        growthStage === "Seedling" ? "Handle with care to avoid damage" : "",
-      ].filter(Boolean),
-    };
-  };
-  
-  const getRecipeIdeas = (plantName: string, growthStage: string) => {
-    // Return recipe ideas based on plant type and growth stage
-    // This would be expanded with your recipe database
-    if (growthStage === "Seedling" || growthStage === "Seed") {
-      return [
-        { name: "Microgreen Salad", description: "Fresh and nutritious" },
-        { name: "Sprout Sandwich", description: "Healthy and crunchy" },
-      ];
-    } else {
-      return [
-        { name: `${plantName} Salad`, description: "Fresh from the garden" },
-        { name: `Roasted ${plantName}`, description: "Simple and delicious\" },
-        { name: `${plantName} Soup`, description: "Comforting and nutritious" },
-      ];
-    }
-  };
-  
-  const resetScan = () => {
-    setCapturedImage(null);
-    setAnalysisResult(null);
-    startCamera();
-  };
-  
-  return (
-    <div className="container mx-auto py-8 px-4">
-      <h1 className="text-2xl font-bold mb-4">Plant Identification Scan</h1>
-      
-      <Card>
-        <CardContent className="space-y-4">
-          {/* Camera View */}
-          {!capturedImage && (
-            <div className="relative">
-              <video ref={videoRef} className="w-full aspect-video rounded-md" autoPlay muted playsInline></video>
-              <Button
-                onClick={captureImage}
-                className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-blue-500 hover:bg-blue-700 text-white"
-              >
-                <Camera className="mr-2 h-4 w-4" />
-                Capture
-              </Button>
-            </div>
-          )}
-          
-          {/* Upload Image */}
-          {!capturedImage && (
-            <div>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleFileUpload}
-                ref={fileInputRef}
-                className="hidden"
-              />
-              <Button
-                onClick={() => fileInputRef.current?.click()}
-                className="bg-green-500 hover:bg-green-700 text-white"
-              >
-                <Upload className="mr-2 h-4 w-4" />
-                Upload Image
-              </Button>
-            </div>
-          )}
-          
-          {/* Captured Image */}
-          {capturedImage && (
-            <div className="relative">
-              <img ref={imageRef} src={capturedImage || "/placeholder.svg"} alt="Captured Plant" className="w-full rounded-md" />
-              <Button
-                onClick={resetScan}
-                className="absolute top-2 right-2 bg-gray-600 hover:bg-gray-800 text-white"
-              >
-                <RefreshCw className="mr-2 h-4 w-4" />
-                Retake
-              </Button>
-            </div>
-          )}
-          
-          {/* Model Loading State */}
-          {isModelLoading && (
-            <div className="text-center">
-              <Loader2 className="inline-block animate-spin mr-2 h-6 w-6" />
-              Loading Plant Identification Model...
-            </div>
-          )}
-          
-          {/* Model Error State */}
-          {modelError && (
-            <div className="text-red-500 text-center">
-              Error: {modelError}
-            </div>
-          )}
-          
-          {/* Analysis State */}
-          {isAnalyzing && (
-            <div className="text-center">
-              <Loader2 className="inline-block animate-spin mr-2 h-6 w-6" />
-              Analyzing Image...
-            </div>
-          )}
-          
-          {/* Analysis Result */}
-          {analysisResult && (
-            <div className="space-y-2">
-              <h2 className="text-xl font-semibold">Analysis Result</h2>
-              <p>
-                <b>Plant Type:</b> {analysisResult.className}
-              </p>
-              <p>
-                <b>Growth Stage:</b> {analysisResult.growthStage}
-              </p>
-              <p>
-                <b>Confidence:</b> {(analysisResult.confidence * 100).toFixed(2)}%
-              </p>
-              <p>
-                <b>Scientific Name:</b> {analysisResult.scientificName}
-              </p>
-              
-              <h3 className="text-lg font-medium">Care Needs</h3>
-              <ul>
-                <li><b>Water:</b> {analysisResult.careNeeds.water}</li>
-                <li><b>Light:</b> {analysisResult.careNeeds.light}</li>
-                <li><b>Soil:</b> {analysisResult.careNeeds.soil}</li>
-                <li>
-                  <b>Tips:</b>
-                  <ul>
-                    {analysisResult.careNeeds.tips.map((tip: string, index: number) => (
-                      <li key={index}>{tip}</li>
-                    ))}
-                  </ul>
-                </li>
-              </ul>
-              
-              <h3 className="text-lg font-medium">Recipe Ideas</h3>
-              <ul>
-                {analysisResult.recipes.map((recipe: any, index: number) => (
-                  <li key={index}>
-                    <b>{recipe.name}:</b> {recipe.description}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </CardContent>
-      </Card>
-    </div>
-  );
-} `}
-</pre>
+                    <ScanPage />
                 </div>
               </div>
-              
+
               <Separator />
-              
+
               <div className="space-y-2">
                 <h3 className="text-lg font-medium text-green-800 dark:text-green-300">
                   4. Testing and Deployment
@@ -1009,14 +692,14 @@ export default function ScanPage() {
               </div>
             </CardContent>
             <CardFooter>
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 onClick={() => setActiveTab("export")}
                 className="border-green-600 text-green-700 hover:bg-green-50 dark:text-green-400 dark:border-green-500 dark:hover:bg-green-900 mr-auto"
               >
                 Back: Export
               </Button>
-              <Button 
+              <Button
                 className="bg-green-600 hover:bg-green-700 text-white"
               >
                 <Download className="mr-2 h-4 w-4" />
